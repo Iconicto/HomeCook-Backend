@@ -1,10 +1,9 @@
 import graphene
+import Recipe.schema
 
-# import links.schema
-#
-#
-# class Query(links.schema.Query, graphene.ObjectType):
-#     pass
-#
-#
-# schema = graphene.Schema(query=Query)
+
+class Query(Recipe.schema.Query, graphene.ObjectType):
+    pass
+
+
+schema = graphene.Schema(query=Query)
