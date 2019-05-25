@@ -7,7 +7,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d
+      - ./nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - homecook_web
   homecook_db:
@@ -32,6 +32,6 @@ services:
       S3_ENDPOINT_URL: ${S3_ENDPOINT_URL}
       CDN: ${CDN}
     expose:
-          - "8000"
+        - "8000"
     depends_on:
       - homecook_db
