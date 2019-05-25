@@ -19,7 +19,7 @@ services:
     container_name: HomeCook-Django
     build:
       context: ../../
-      dockerfile: Deployment/Development/Dockerfile
+      dockerfile: Deployment/Production/Dockerfile
     command: bash -c "python manage.py migrate --noinput && gunicorn HomeCook.wsgi -b 0.0.0.0:8000"
     environment:
       PGPASSWORD: ${PGPASSWORD}
