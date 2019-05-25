@@ -37,3 +37,6 @@ services:
         - "8000"
     depends_on:
       - homecook_db
+volumes:
+  postgres-data:
+    driver: local
