@@ -24,7 +24,7 @@ SECRET_KEY = 'u=^o$lo1%d)f5^rynl@o4pz)oo92=18l3guislik0iq2j+_x*6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG') == 'True'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'homecook.iconicto.com', '0.0.0.0', 'cdn.iconicto.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'homecook.iconicto.com', '0.0.0.0', 'cdn.iconicto.com', '178.128.222.109']
 
 # Application definition
 
