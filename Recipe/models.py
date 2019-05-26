@@ -41,7 +41,7 @@ class RecipeIngredient(models.Model):
     recipe = models.ForeignKey(Recipe, related_name='ingredients', on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, related_name='ingredients', on_delete=models.CASCADE)
     quantity = models.DecimalField(max_digits=10, decimal_places=2)
-    unit = models.CharField(max_length=15, default='',
+    unit = models.CharField(max_length=15, default='', blank=True,
                             choices=(
                                 ('ml', 'milliliters'),
                                 ('cups', 'cups'),
