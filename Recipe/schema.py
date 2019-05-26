@@ -19,10 +19,16 @@ class StepType(DjangoObjectType):
         model = Step
 
 
+class RecipeIngredientType(DjangoObjectType):
+    class Meta:
+        model = RecipeIngredient
+
+
 class Query(graphene.ObjectType):
     recipes = graphene.List(RecipeType)
     ingredients = graphene.List(IngredientType)
     steps = graphene.List(StepType)
+    recipe_ingredient = graphene.List(RecipeIngredient)
 
     def resolve_recipes(self, info, **kwargs):
         return Recipe.objects.all()
@@ -30,5 +36,5 @@ class Query(graphene.ObjectType):
     def resolve_ingredients(self, info, **kwargs):
         return Ingredient.objects.all()
 
-    def resolve_steps(self, info, **kwargs):
-        return Step.objects.all()
+    # def resolve_steps(self, info, **kwargs):
+    #     return Step.objects.all()
