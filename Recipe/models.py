@@ -27,7 +27,7 @@ class Ingredient(models.Model):
 
 
 class Step(models.Model):
-    recipe = models.ForeignKey(Recipe, on_delete=models.DO_NOTHING)
+    recipe = models.ForeignKey(Recipe, related_name='steps', on_delete=models.CASCADE)
     stepNumber = models.IntegerField()
     instruction = models.TextField()
     description = models.TextField(blank=True)
@@ -38,8 +38,8 @@ class Step(models.Model):
 
 
 class RecipeIngredient(models.Model):
-    recipe = models.ForeignKey(Recipe, on_delete=models.DO_NOTHING)
-    ingredient = models.ForeignKey(Ingredient, on_delete=models.DO_NOTHING)
+    recipe = models.ForeignKey(Recipe, related_name='ingredients', on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, related_name='ingredients', on_delete=models.CASCADE)
     quantity = models.DecimalField(max_digits=10, decimal_places=2)
     unit = models.CharField(max_length=15, blank=True,
                             choices=(

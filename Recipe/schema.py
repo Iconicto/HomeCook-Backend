@@ -28,7 +28,7 @@ class Query(graphene.ObjectType):
     recipes = graphene.List(RecipeType)
     ingredients = graphene.List(IngredientType)
     steps = graphene.List(StepType)
-    recipe_ingredients = graphene.List(RecipeIngredient)
+    # recipe_ingredients = graphene.List(RecipeIngredient)
 
     def resolve_recipes(self, info, **kwargs):
         return Recipe.objects.all()
@@ -38,6 +38,3 @@ class Query(graphene.ObjectType):
 
     def resolve_steps(self, info, **kwargs):
         return Step.objects.all()
-
-    def resolve_recipe_ingredients(self, info, **kwargs):
-        return RecipeIngredient.objects.all()
