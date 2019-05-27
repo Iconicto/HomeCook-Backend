@@ -65,11 +65,11 @@ class RecipeIngredientType(DjangoObjectType):
 class Query(graphene.ObjectType):
     # recipes = graphene.List(RecipeType)
     #
-    recipe = graphene.Field(RecipeType)
-    recipes = DjangoFilterConnectionField(RecipeType)
+    recipe = graphene.Field(RecipeType, id=graphene.Int())
+    recipes = graphene.List(RecipeType, )
 
-    ingredient = graphene.Field(IngredientType)
-    ingredients = graphene.List(IngredientType)
+    ingredient = graphene.Field(IngredientType, id=graphene.Int())
+    ingredients = graphene.List(IngredientType, ingredients_in=graphene.List(of_type=graphene.ID))
     # ingredients = DjangoFilterConnectionField(IngredientType)
 
     def resolve_recipe(self, info, **kwargs):
@@ -89,6 +89,10 @@ class Query(graphene.ObjectType):
         return None
 
     def resolve_recipes(self, info, **kwargs):
+        ingredients_in = kwargs.get('ingredients')
+        if ingredients_in is not None:
+            return Recipe.objects.filter(ingredients__in=ingredients_in)
+
         return Recipe.objects.all()
 
     def resolve_ingredients(self, info, **kwargs):
