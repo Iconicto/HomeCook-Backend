@@ -5,7 +5,7 @@ from .models import *
 # Register your models here.
 
 class RecipeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'rating', 'prepTime', 'calories', 'dishImage', 'bannerImage')
+    list_display = ('name', 'description', 'rating', 'prepTime', 'calories', 'dishImage', 'bannerImage', 'isPopular')
     list_display_links = list_display
 
 
