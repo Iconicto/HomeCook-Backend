@@ -12,6 +12,7 @@ class Recipe(models.Model):
     calories = models.IntegerField()
     dishImage = models.ImageField(upload_to='Recipe/DishImages/')
     bannerImage = models.ImageField(upload_to='Recipe/Banners/')
+    isPopular = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -41,17 +42,16 @@ class RecipeIngredient(models.Model):
     recipe = models.ForeignKey(Recipe, related_name='ingredients', on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, related_name='ingredients', on_delete=models.CASCADE)
     quantity = models.DecimalField(max_digits=10, decimal_places=2)
-    unit = models.CharField(max_length=15, default='', blank=True,
+    unit = models.CharField(max_length=15, default='', blank=True, null=True,
                             choices=(
                                 ('ml', 'milliliters'),
                                 ('cups', 'cups'),
-                                ('liter', 'liters'),
-                                ('teaspoon', 'teaspoon'),
-                                ('tablespoon', 'tablespoon'),
-                                ('liter', 'liters'),
+                                ('tsp', 'teaspoon'),
+                                ('tb', 'tablespoon'),
+                                ('l', 'liters'),
                                 ('oz', 'ounce'),
-                                ('gram', 'grams'),
-                                ('', ''),
+                                ('g', 'grams'),
+                                (' ', ''),
                             ))
 
     def __str__(self):

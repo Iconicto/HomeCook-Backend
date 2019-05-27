@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'Recipe',
     'storages',
     'corsheaders',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
