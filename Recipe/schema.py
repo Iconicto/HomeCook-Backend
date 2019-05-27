@@ -65,10 +65,10 @@ class RecipeIngredientType(DjangoObjectType):
 class Query(graphene.ObjectType):
     # recipes = graphene.List(RecipeType)
     #
-    recipe = Node.Field(RecipeType)
+    recipe = graphene.Field(RecipeType)
     recipes = DjangoFilterConnectionField(RecipeType)
 
-    ingredient = Node.Field(IngredientType)
+    ingredient = graphene.Field(IngredientType)
     ingredients = graphene.List(IngredientType)
     # ingredients = DjangoFilterConnectionField(IngredientType)
 
