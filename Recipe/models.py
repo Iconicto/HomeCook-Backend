@@ -5,8 +5,6 @@ from django.db import models
 class Recipe(models.Model):
     name = models.CharField(max_length=150)
     description = models.TextField()
-    # steps
-    # ingredients
     rating = models.DecimalField(max_digits=2, decimal_places=1)
     prepTime = models.DecimalField(max_digits=5, decimal_places=2)
     calories = models.IntegerField()
@@ -41,6 +39,7 @@ class Step(models.Model):
 class RecipeIngredient(models.Model):
     recipe = models.ForeignKey(Recipe, related_name='ingredients', on_delete=models.CASCADE)
     ingredient = models.ForeignKey(Ingredient, related_name='ingredients', on_delete=models.CASCADE)
+    optional = models.BooleanField(default=False)
     quantity = models.DecimalField(max_digits=10, decimal_places=2)
     unit = models.CharField(max_length=15, default='',
                             choices=(
