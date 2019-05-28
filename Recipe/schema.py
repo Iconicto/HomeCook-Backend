@@ -1,7 +1,7 @@
+from django.db.models import Count
 import graphene
 from graphene_django.types import DjangoObjectType
 from django.db.models import Q
-
 
 from .models import *
 
@@ -60,18 +60,21 @@ class Query(graphene.ObjectType):
         return None
 
     def resolve_recipes(self, info, **kwargs):
-        ingredients_in = kwargs.get('ingredients')
+        ingredients_in = kwargs.get('ingredients_in')
         ingredients_in_exact = kwargs.get('ingredients_in_exact')
         if ingredients_in_exact is not None:
-            print(ingredients_in_exact, type(ingredients_in_exact))
-            data = None
+            my_filter_qs = Q()
+            ingredients_ids = []
             for ingredient_in_exact in ingredients_in_exact:
-                data += Recipe.objects.filter(Q(ingredients__id=ingredient_in_exact['id']) &
-                                          Q(ingredients__quantity=ingredient_in_exact['quantity']))
-            return data
+                # my_filter_qs = my_filter_qs | (Q(ingredients__quantity__lte=ingredient_in_exact['quantity']
+                #                                  ) | Q(ingredients__optional__exact=False))
+                ingredients_ids.append(ingredient_in_exact['id'])
+            print(Recipe.objects.filter(my_filter_qs).query)
+            return Recipe.objects.filter(ingredients__ingredient_id__in=ingredients_ids).annotate(
+                num_ingredients=Count('ingredients')).filter(num_ingredients=len(ingredients_ids))
 
         if ingredients_in is not None:
-            return Recipe.objects.filter(ingredients__in=ingredients_in)
+            return Recipe.objects.filter(ingredients__ingredient_id__in=ingredients_in).distinct()
 
         return Recipe.objects.all()
 

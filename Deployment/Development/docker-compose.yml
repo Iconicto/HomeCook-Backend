@@ -6,6 +6,8 @@ services:
     container_name: HomeCook-Postgres-Development
     environment:
       POSTGRES_PASSWORD: ${PGPASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
   homecook_web:
     container_name: HomeCook-Django-Development
     build:
@@ -28,3 +30,6 @@ services:
       - "8000:8000"
     depends_on:
       - homecook_db
+volumes:
+  postgres-data:
+    driver: local
