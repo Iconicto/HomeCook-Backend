@@ -3,15 +3,16 @@ import base64
 import json
 from io import BytesIO
 import numpy as np
-from keras.preprocessing import image
+import tensorflow as tf
 import requests
 from django.views.decorators.http import require_http_methods
 
 
 @require_http_methods(["POST"])
 def vision_api(request):
-    img = image.img_to_array(image.load_img(BytesIO(base64.b64decode(request.POST.get('b64'))),
-                                            target_size=(224, 224))) / 255.
+    img = tf.keras.preprocessing.image.img_to_array(
+        tf.keras.preprocessing.image.load_img(BytesIO(base64.b64decode(request.POST.get('b64'))),
+                                              target_size=(224, 224))) / 255.
 
     # this line is added because of a bug in tf_serving(1.10.0-dev)
     img = img.astype('float16')
