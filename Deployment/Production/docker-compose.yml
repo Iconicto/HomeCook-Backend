@@ -41,9 +41,9 @@ services:
     container_name: HomeCook-Vision
     image: tensorflow/serving:latest
     environment:
-      MODEL_NAME: HomeCookVision
+      MODEL_NAME: HomeCook
     volumes:
-      - /var/www/HomeCook-Backend/VisionAPI/HomeCook:/models/my_model
+      - /var/www/HomeCook-Backend/VisionAPI/HomeCook:/models/HomeCook
     ports:
       - "8501:8501"
 volumes:
