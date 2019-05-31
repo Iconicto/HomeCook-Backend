@@ -37,6 +37,15 @@ services:
         - "8000"
     depends_on:
       - homecook_db
+  homecook_vision:
+    container_name: HomeCook-Vision
+    image: tensorflow/serving:latest
+    environment:
+      MODEL_NAME: HomeCookVision
+    volumes:
+      - /var/www/HomeCook-Backend/VisionAPI/HomeCook:/models/my_model
+    ports:
+      - "8501:8501"
 volumes:
   postgres-data:
     driver: local
